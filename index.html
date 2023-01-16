@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function extractText() {
+        // Get the selected file
+        var file = document.getElementById('imageFile').files[0];
+
+        // Create a new FormData object
+        var formData = new FormData();
+
+        // Add the file to the FormData object
+        formData.append('image', file);
+
+        // Make a POST request to the server
+        fetch('main.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(text => {
+          // Display the extracted text
+          document.getElementById('output').innerHTML = text;
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <input type="file" id="imageFile">
+    <button onclick="extractText()">Extract Text</button>
+    <div id="output"></div>
+  </body>
+</html>
